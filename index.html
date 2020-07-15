@@ -1,0 +1,73 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="interface.css" />
+<script type="text/javascript" src="main.js"></script>
+<title>SILICA</title>
+</head>
+
+<body>
+
+<header>
+SILICA <div style = "float: right; font-size: smaller; padding-top: 2px"> save . load . export . import </div>
+</header>
+
+<hr/>
+
+<div class = "leftCol">
+
+	<div class = "box" style = "text-align: center;"> <div style = "width: auto; margin: 15px;">
+		SUN
+		<hr/>
+<pre>
+      ..                  
+    .    .                
+   '      '               
+  '        '              
+ '          '            '
+             O          ' 
+              '        '  
+               .      .   
+                '    '    
+                  ''      
+</pre>
+		<hr/>
+		PLACEHOLDER%  
+	</div> </div>
+
+	<div class = "box"> <div style = "width: auto; margin: 15px;">
+		placeholder text
+	</div> </div>
+
+</div>
+
+<div class = "centerCol">
+
+	<div class = "tab">
+		<button id = "mainTabButton" class = "navigation shown" onClick = "tabSwitch(event, 'mainTab')">placeholder</button>
+		<button class = "navigation" onClick = "tabSwitch(event, 'placeholderTab')">placeholder</button>
+		<button class = "navigation">placeholder</button>
+		<button class = "navigation">placeholder</button>
+	</div>
+	
+	<div class = "box" style = "height: 50%;"> 
+		<div id = "mainTab" class = "mainTabContent" style = "width: auto; margin: 15px; display: block;">
+			<span id = "sandCountDisplay"></span><br/>
+			<button class = "normal" onClick="gather(1)">GATHER</button>
+		</div> 
+		<div id = "placeholderTab" class = "mainTabContent" style = "width: auto; margin: 15px;">
+			if you see this it is not working
+		</div>
+	</div>
+	
+</div>
+
+<footer>
+by ellory erecius
+</footer>
+
+</body>
+
+</html> 
