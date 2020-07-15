@@ -1,5 +1,3 @@
-document.getElementById("mainTabButton").click();
-
 // variables
 let sandCount = 0;
 let reedCount = 0;
@@ -9,10 +7,6 @@ let paperCount = 0;
 
 
 // functions
-function loadDefaultTab() {
-	document.getElementById("mainTabButton").click();
-}
-
 function numToDots(number) {
   let extraDots = "";
   switch (number % 5) {
