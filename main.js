@@ -2,9 +2,15 @@
 let sandCount = 0;
 let reedCount = 0;
 let clayCount = 0;
-
 let paperCount = 0;
 
+let tickSpeed = 200;
+let gameTimeRate = 0.02;
+let gameTime = 0;
+let dayCount = 0;
+let lightLevel = 0
+let sunPosX;
+let sunPosY;
 
 // functions
 function numToDots(number) {
@@ -23,12 +29,11 @@ function numToDots(number) {
       extraDots = "․";
       break;
   }
-  document.getElementById("sandCountDisplay").innerHTML = "⁙".repeat((number - (number % 5)) / 5) + extraDots;
+  return "⁙".repeat((number - (number % 5)) / 5) + extraDots;
 }
 
 function gather(gained) {
     sandCount += gained;
-    numToDots(sandCount);
 }
 
 function tabSwitch(evt, tab) { /* FANK YEW W3SCHOOLS I WUD B NO WHERE WIFFOUT YEW */
@@ -51,3 +56,73 @@ function tabSwitch(evt, tab) { /* FANK YEW W3SCHOOLS I WUD B NO WHERE WIFFOUT YE
   document.getElementById(tab).style.display = "block";
   evt.currentTarget.className += " shown";
 } 
+
+function changeSkyColor() {
+	if (gameTime < 9) {
+		sunPosX = (100 * gameTime) / 9;
+	} else {
+		sunPosX = ((-100 * gameTime) / 9) + 200;
+	};
+	sunPosY = -70 * Math.sin((Math.PI * gameTime) / 9) + 100;
+	document.getElementById("day").style = "background: radial-gradient(circle at " + sunPosX + "% " + sunPosY + "%, #fee2c6, #679980, #679980, #679980); opacity: " + lightLevel + ";";
+	document.getElementById("night").style.opacity = 1 - lightLevel;
+}
+
+function getLightLevel() {
+	let lightPhrase;
+
+	lightLevel = ((Math.sin((Math.PI * Math.cos(((Math.PI * gameTime) / 9) - (Math.PI / 2)) / 2)) + 1) / 2) + 0.05;
+	if (lightLevel > 1) {
+		lightLevel = 1;
+	};
+	if (lightLevel <= 0.06) {
+		lightPhrase = "i can't see a thing!";
+	} else if (lightLevel < 0.33 && gameTime > 13.5) {
+		lightPhrase = "the sun should rise soon.";
+	} else if (lightLevel < 0.75 && lightLevel >= 0.33) {
+		lightPhrase = "shhhh, watch. . .";
+	} else if (lightLevel < 0.9 && gameTime < 4.5) {
+		lightPhrase = "it's getting hot already. . .";
+	} else if (lightLevel < 1 && gameTime < 4.5) {
+		lightPhrase = "sure is bright out here!";
+	} else if (lightLevel === 1) {
+		lightPhrase = "i can see for miles. . .";
+	} else if (lightLevel < 1 && lightLevel >= 0.9 && gameTime > 4.5) {
+		lightPhrase = "the shadows are getting long.";
+	} else if (lightLevel < 0.9 && lightLevel >= 0.5 && gameTime > 4.5) {
+		lightPhrase = "goodbye, sun. . .";
+	} else {
+		lightPhrase = "it's still warm out. . .";
+	}
+	;
+	document.getElementById("lightPhrase").innerHTML = lightPhrase;
+}
+
+// dev functions
+function ffw(time) {
+	gameTimeRate = time;
+}
+
+function timeSet(time) {
+	gameTime = time;
+}
+
+function giveSand(amt) {
+	sandCount += amt;
+}
+
+// game loop
+window.setInterval(function() {
+	changeSkyColor();
+	getLightLevel();
+	gameTime += gameTimeRate;
+	if (gameTime >= 18) {
+		dayCount += 1;
+		gameTime = 0;
+		document.getElementById("siteTitle").innerHTML = "SILICA . day " + dayCount;
+	};
+	document.getElementById("sandCountDisplay").innerHTML = numToDots(sandCount);
+	document.getElementById("gameTimeDisplay").innerHTML = gameTime.toFixed(2);
+	document.getElementById("dayCount").innerHTML = dayCount;
+	document.getElementById("lightLevel").innerHTML = (lightLevel * 100).toFixed(0);
+}, tickSpeed);

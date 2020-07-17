@@ -5,49 +5,63 @@
 <meta charset="utf-8"/>
 <link rel="stylesheet" type="text/css" href="interface.css" />
 <script type="text/javascript" src="main.js"></script>
-<title>SILICA</title>
+<title id = "siteTitle">SILICA . day 0</title>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-
 <header>
-SILICA <div style = "float: right; font-size: smaller; padding-top: 2px"> save . load . export . import </div>
+SILICA
+ . day <span id = "dayCount"></span>
+<div title = "no functionality yet LOOOL" style = "float: right; font-size: smaller; padding-top: 2px;">save . load . export .  import</div>
 </header>
 
 <hr/>
 
-<div class = "leftCol">
-
-	<div class = "box" style = "text-align: center;"> <div style = "width: auto; margin: 15px;">
-		SUN
-		<hr/>
-<pre>
-      ..                  
-    .    .                
-   '      '               
-  '        '              
- '          '            '
-             O          ' 
-              '        '  
-               .      .   
-                '    '    
-                  ''      
-</pre>
-		<hr/>
-		PLACEHOLDER%  
-	</div> </div>
-
-	<div class = "box"> <div style = "width: auto; margin: 15px;">
-		placeholder text
-	</div> </div>
-
+<div class = "leftCol" style = "position: relative">
+	<div class = "box" style = "background-color: #023b75; background: linear-gradient(#023b75, red); height: 150px;">
+	</div>
+	
+	<div id = "night" class = "skyColor box" style = "background-color: #153f4e;">
+		<div style = "border: inset 3px #998067; height: 144px;">
+			<div style = "width: auto; margin: 5px; margin-top: -9px; color: #998067; font-size: 12px;">
+				<pre>
+  .      *                     . |    
+                      .          |  
+          .               .      |  
+      .            *             |  
+                    .            |  
+          .        .     .       |  
+            .           .        |  
+ .     *                       . |  
+                  .              |
+    .                    .       |
+			</pre>
+			</div>
+		</div>
+	</div>
+	
+	<div id = "day" class = "skyColor box" title = "THOUGHT: the sky sure is pretty out here!" style = "background: radial-gradient(circle at 30% 30%, #fee2c6, #679980, #679980, #679980);">
+		<div style = "border: inset 3px #998067; height: 144px;">
+			<div style = "width: auto; margin: 5px; margin-top: -9px; color: #fee2c6; font-size: 12px;">
+			</div>
+		</div>
+	</div>
+	
+	<div class = "box" style = "text-align: center;" title = "THOUGHT: when the light gets low, i might have trouble gathering. . .">
+		<div style = "width: auto; margin: 15px;">
+			<span id = "lightPhrase" style = "font-size: 12px;"></span>   
+		</div>
+	</div>
 </div>
 
 <div class = "centerCol">
 
 	<div class = "tab">
-		<button id = "mainTabButton" class = "navigation shown" onClick = "tabSwitch(event, 'mainTab')">placeholder</button>
-		<button class = "navigation" onClick = "tabSwitch(event, 'placeholderTab')">placeholder</button>
+		<button id = "mainTabButton" class = "navigation shown" onClick = "tabSwitch(event, 'mainTab')">DESERT</button>
+		<button class = "navigation" onClick = "tabSwitch(event, 'placeholderTab')">secret</button>
+		<button class = "navigation">placeholder</button>
 		<button class = "navigation">placeholder</button>
 		<button class = "navigation">placeholder</button>
 	</div>
@@ -58,13 +72,24 @@ SILICA <div style = "float: right; font-size: smaller; padding-top: 2px"> save .
 			<button class = "normal" onClick="gather(1)">GATHER</button>
 		</div> 
 		<div id = "placeholderTab" class = "mainTabContent" style = "width: auto; margin: 15px;">
-			if you see this it is not working
+			you are gay
 		</div>
 	</div>
 	
 </div>
 
+<div class = "rightCol">
+</div>
+
 <footer>
+<div style = "font-size: smaller;">
+	temporary dev shit:
+	time <span id = "gameTimeDisplay"></span>
+	 | light: <span id = "lightLevel"></span>%
+	 | timeSet()
+	ffw()
+	giveSand()
+</div>
 by ellory erecius
 </footer>
 
