@@ -4,95 +4,89 @@
 <head>
 <meta charset="utf-8"/>
 <link rel="stylesheet" type="text/css" href="interface.css" />
-<script type="text/javascript" src="main.js"></script>
-<title id = "siteTitle">SILICA . day 0</title>
+<title id = "site-title">SILICA . day 0</title>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
+
 <header>
-SILICA
- . day <span id = "dayCount"></span>
-<div title = "no functionality yet LOOOL" style = "float: right; font-size: smaller; padding-top: 2px;">save . load . export .  import</div>
+
+SILICA . day <span id = "days"></span> . <span id = "light-phrase"></span>
+
+
+<div title = "no functionality yet LOOOL" style = "font-size: smaller; position: absolute; top: 7.5px; right: 7.5px;">
+	save . load . export .  import
+</div>
+<hr>
 </header>
 
-<hr/>
-
-<div class = "leftCol" style = "position: relative">
-	<div class = "box" style = "background-color: #023b75; background: linear-gradient(#023b75, red); height: 150px;">
-	</div>
+<div class = "body-grid">
 	
-	<div id = "night" class = "skyColor box" style = "background-color: #153f4e;">
-		<div style = "border: inset 3px #998067; height: 144px;">
-			<div style = "width: auto; margin: 5px; margin-top: -9px; color: #998067; font-size: 12px;">
-				<pre>
-  .      *                     . |    
-                      .          |  
-          .               .      |  
-      .            *             |  
-                    .            |  
-          .        .     .       |  
-            .           .        |  
- .     *                       . |  
-                  .              |
-    .                    .       |
-			</pre>
-			</div>
-		</div>
-	</div>
+	<!-- left -->
+<div id = "sunset" class = "sky-color box">
+</div>
 	
-	<div id = "day" class = "skyColor box" title = "THOUGHT: the sky sure is pretty out here!" style = "background: radial-gradient(circle at 30% 30%, #fee2c6, #679980, #679980, #679980);">
-		<div style = "border: inset 3px #998067; height: 144px;">
-			<div style = "width: auto; margin: 5px; margin-top: -9px; color: #fee2c6; font-size: 12px;">
-			</div>
-		</div>
-	</div>
+<div id = "night" class = "sky-color">
+</div>
 	
-	<div class = "box" style = "text-align: center;" title = "THOUGHT: when the light gets low, i might have trouble gathering. . .">
-		<div style = "width: auto; margin: 15px;">
-			<span id = "lightPhrase" style = "font-size: 12px;"></span>   
+<div id = "day" class = "sky-color" title = "THOUGHT:&#013;the sky sure is pretty out here!">
+</div>
+	
+<div id = "thought" class = "box">
+	<div style = "text-align: center; grid-column: 2 / 3; grid-row: 2 / 3;">THOUGHT:</div>
+	<div class = "in-box" style = "font-style: italic; overflow: hidden; grid-column: 2 / 3; grid-row: 3 / 4;">
+		<div class = "text">
+			<ul>
+			<span id = "thought-array"></span>
+			</ul>
 		</div>
 	</div>
 </div>
 
-<div class = "centerCol">
 
-	<div class = "tab">
-		<button id = "mainTabButton" class = "navigation shown" onClick = "tabSwitch(event, 'mainTab')">DESERT</button>
-		<button class = "navigation" onClick = "tabSwitch(event, 'placeholderTab')">secret</button>
-		<button class = "navigation">placeholder</button>
-		<button class = "navigation">placeholder</button>
-		<button class = "navigation">placeholder</button>
-	</div>
+	<!-- center -->
+<div id = "center">
+	<div id = "center-box" class = "box"> 
 	
-	<div class = "box" style = "height: 50%;"> 
-		<div id = "mainTab" class = "mainTabContent" style = "width: auto; margin: 15px; display: block;">
-			<span id = "sandCountDisplay"></span><br/>
-			<button class = "normal" onClick="gather(1)">GATHER</button>
+		<div id = "main-tab" class = "tab-content text" style = "display: block;">
+			
+			<button id = "gather-button" class = "normal" onClick="gather(1)" title = "THOUGHT:&#013;one grain at a time . . .&#013;i mustn't drop them . . ." style = "width: 185px;">GATHER SAND</button>
+			
+			<div class = "in-box" style = "overflow-wrap: anywhere; font-size: 24px; line-height: 14px; width: 155px; padding: 15px; height: 280px;">
+				<span id = "sand-count"></span>
+			</div>
+			
+			<span id = "gather-msg" style = "margin-left: 7.5px; font-style: italic; font-size: 12px;"></span>
 		</div> 
-		<div id = "placeholderTab" class = "mainTabContent" style = "width: auto; margin: 15px;">
-			you are gay
+		
+		<div id = "sandglass-tab" class = "tab-content text">
+			<div class = "in-box" style = "width: auto; float: left;">
+				hello LOL how are you?
+			</div>
 		</div>
+		
 	</div>
+	
+	<div id = "center-tab" class = "tab">
+		<button id = "main-tab-button" class = "navigation shown" onClick = "tabSwitch(event, 'main-tab')">DESERT</button>
+		<button class = "navigation" onClick = "tabSwitch(event, 'sandglass-tab')">SANDGLASS</button>
+	</div>
+</div>
+	
+<div style = "grid-column: 3 / 4; grid-row: 5 / 20;" class = "box">
+</div>
 	
 </div>
 
-<div class = "rightCol">
-</div>
 
 <footer>
-<div style = "font-size: smaller;">
-	temporary dev shit:
-	time <span id = "gameTimeDisplay"></span>
-	 | light: <span id = "lightLevel"></span>%
-	 | timeSet()
-	ffw()
-	giveSand()
-</div>
-by ellory erecius
+	temporary dev shit: time <span id = "game-time"></span> | light: <span id = "light-level"></span>% | by ellory erecius
 </footer>
 
 </body>
+
+<script type="text/javascript" src="main.js"></script>
 
 </html> 

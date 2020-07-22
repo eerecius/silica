@@ -1,9 +1,27 @@
-// variables
-let sandCount = 0;
+// resource variables
+let sandCount = 1000;
+let sandCap = 1000;
 let reedCount = 0;
+let reedCap = 50;
 let clayCount = 0;
+let clayCap = 50
 let paperCount = 0;
 
+// thought
+let thoughtArray = [
+	"ugh . . . where am i?", 
+	"a desert?. . . what is this SANDGLASS?",
+	"how peculiar. . . it hasn't any SAND in it!",
+	"well, i suppose i shall hold onto it until i find its owner. . .",
+	'<p style = "text-align: center;">SILICA</p>'
+];
+let thoughtArrayDisplay = [];
+let thoughtProg = 0;
+let thoughtProgCache = -1;
+
+// unlocks
+
+// game loop/environmental
 let tickSpeed = 200;
 let gameTimeRate = 0.02;
 let gameTime = 0;
@@ -26,14 +44,39 @@ function numToDots(number) {
       extraDots = "‥";
       break;
     case 1:
-      extraDots = "․";
+      extraDots = ".";
       break;
   }
   return "⁙".repeat((number - (number % 5)) / 5) + extraDots;
 }
 
 function gather(gained) {
-    sandCount += gained;
+    if (sandCount === sandCap - 1) {
+		sandCount += gained;
+		document.getElementById("gather-msg").innerHTML = "my pockets are full!"
+	} else if (Math.random() < lightLevel) {
+		sandCount += gained;
+		document.getElementById("gather-msg").innerHTML = "i picked up a grain of sand."
+	} else {
+		document.getElementById("gather-msg").innerHTML = "i dropped the grain of sand."
+	}
+}
+
+function capResources() {
+	if (sandCount > sandCap) {
+		sandCount = sandCap;
+	};
+	if (sandCount === sandCap) {
+		document.getElementById("gather-button").disabled = true;
+	} else {
+		document.getElementById("gather-button").disabled = false;
+	};
+	if (reedCount > reedCap) {
+		reedCount = reedCap;
+	};
+	if (clayCount > clayCap) {
+		clayCount = clayCap;
+	};
 }
 
 function tabSwitch(evt, tab) { /* FANK YEW W3SCHOOLS I WUD B NO WHERE WIFFOUT YEW */
@@ -41,7 +84,7 @@ function tabSwitch(evt, tab) { /* FANK YEW W3SCHOOLS I WUD B NO WHERE WIFFOUT YE
 	let i, tabcontent, tablinks;
 
 	// Get all elements with class="tabcontent" and hide them
-	tabcontent = document.getElementsByClassName("mainTabContent");
+	tabcontent = document.getElementsByClassName("tab-content");
 	for (i = 0; i < tabcontent.length; i++) {
 		tabcontent[i].style.display = "none";
  }
@@ -53,7 +96,7 @@ function tabSwitch(evt, tab) { /* FANK YEW W3SCHOOLS I WUD B NO WHERE WIFFOUT YE
   }
 
   // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(tab).style.display = "block";
+  document.getElementById(tab).style.display = "grid";
   evt.currentTarget.className += " shown";
 } 
 
@@ -75,54 +118,86 @@ function getLightLevel() {
 	if (lightLevel > 1) {
 		lightLevel = 1;
 	};
-	if (lightLevel <= 0.06) {
-		lightPhrase = "i can't see a thing!";
-	} else if (lightLevel < 0.33 && gameTime > 13.5) {
-		lightPhrase = "the sun should rise soon.";
-	} else if (lightLevel < 0.75 && lightLevel >= 0.33) {
-		lightPhrase = "shhhh, watch. . .";
-	} else if (lightLevel < 0.9 && gameTime < 4.5) {
-		lightPhrase = "it's getting hot already. . .";
-	} else if (lightLevel < 1 && gameTime < 4.5) {
-		lightPhrase = "sure is bright out here!";
+	
+	if (lightLevel < 0.1) {
+		lightPhrase = "pitch dark"
+	} else if (lightLevel < 0.25) {
+		lightPhrase = "dark out"
+	} else if (lightLevel < 0.5) {
+		lightPhrase = "dim skies"
+	} else if (lightLevel < 0.75 && (gameTime > 13.5 || gameTime < 4.5)) {
+		lightPhrase = "dawn"
+	} else if (lightLevel < 0.75 && (gameTime < 13.5 || gameTime > 4.5)) {
+		lightPhrase = "dusk"
+	} else if (lightLevel < 0.9) {
+		lightPhrase = "light out"
+	} else if (lightLevel < 1) {
+		lightPhrase = "bright"
 	} else if (lightLevel === 1) {
-		lightPhrase = "i can see for miles. . .";
-	} else if (lightLevel < 1 && lightLevel >= 0.9 && gameTime > 4.5) {
-		lightPhrase = "the shadows are getting long.";
-	} else if (lightLevel < 0.9 && lightLevel >= 0.5 && gameTime > 4.5) {
-		lightPhrase = "goodbye, sun. . .";
-	} else {
-		lightPhrase = "it's still warm out. . .";
-	}
-	;
-	document.getElementById("lightPhrase").innerHTML = lightPhrase;
+		lightPhrase = "blinding"
+	};
+	document.getElementById("light-phrase").innerHTML = lightPhrase;
 }
 
-// dev functions
-function ffw(time) {
-	gameTimeRate = time;
+function think(thought) {
+	thoughtArrayDisplay.unshift(thought)
 }
 
-function timeSet(time) {
-	gameTime = time;
-}
-
-function giveSand(amt) {
-	sandCount += amt;
+function doThoughtProg() {
+	// generic
+	if (gameTime === 9) {
+		think("it's getting dark.");
+	};
+	// plot specific
+	if (dayCount === 0) {
+		if (gameTime === 0.5) {
+			thoughtProg += 1;
+		} else if (gameTime === 1) {
+			thoughtProg += 1;
+		} else if (gameTime === 1.5) {
+			thoughtProg += 1;
+		} else if (gameTime === 2) {
+			thoughtProg += 1;
+		};
+	};
 }
 
 // game loop
-window.setInterval(function() {
+function gameLoop() {
+	setTimeout(gameLoop, tickSpeed);
+	//basic updates
 	changeSkyColor();
 	getLightLevel();
+	capResources();
+	
+	//thought array shit
+	doThoughtProg();
+	if (thoughtProgCache !== thoughtProg) {
+		thoughtArrayDisplay.unshift(thoughtArray[thoughtProg]);
+	};
+	if (thoughtArrayDisplay.length > 15) {
+		thoughtArrayDisplay.splice(15);
+	};
+	
+	//gametime shit
 	gameTime += gameTimeRate;
+	gameTime = parseFloat(gameTime.toFixed(2));
 	if (gameTime >= 18) {
 		dayCount += 1;
 		gameTime = 0;
-		document.getElementById("siteTitle").innerHTML = "SILICA . day " + dayCount;
+		document.getElementById("site-title").innerHTML = "SILICA . day " + dayCount;
 	};
-	document.getElementById("sandCountDisplay").innerHTML = numToDots(sandCount);
-	document.getElementById("gameTimeDisplay").innerHTML = gameTime.toFixed(2);
-	document.getElementById("dayCount").innerHTML = dayCount;
-	document.getElementById("lightLevel").innerHTML = (lightLevel * 100).toFixed(0);
-}, tickSpeed);
+	
+	//passing variables to page
+	document.getElementById("sand-count").innerHTML = numToDots(sandCount);
+	document.getElementById("game-time").innerHTML = gameTime;
+	document.getElementById("days").innerHTML = dayCount;
+	document.getElementById("light-level").innerHTML = (lightLevel * 100).toFixed(0);
+	document.getElementById("thought-array").innerHTML = "<li>" + thoughtArrayDisplay.join("</li><li>") + "</li>";
+	thoughtProgCache = thoughtProg;
+};
+
+setTimeout(gameLoop, tickSpeed);
+
+console.log(document.documentElement.clientWidth);
+console.log(document.documentElement.clientHeight);

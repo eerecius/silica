@@ -1,21 +1,59 @@
+/*
+COLORS:
+main: #998067
+mid: #826c57
+bg: #6a5947
+dark: #473b30
+*/
 html {
-	height: 100%;
-	width: 100%;
+	height: 98vh;
+	width: 98vw;
 }
 
 body {
 	height: 100%;
 	width: 100%;
-	font-family: "Lucida Console";
+	font-family: monospace, monospace;
+	font-size: 18px;
 	color: #473b30;
+	
 	background-color: #6a5947;
+	scrollbar-color: #998067 #826c57;
 	cursor: grab;
-	overflow: hidden;
+	overflow-y: auto;
+	overflow-x: auto;
+	
+	display: grid;
+	grid-template-columns: 1fr 5px;
+	grid-template-rows: 30px 1fr 30px;
+	gap: 15px;
 }
 
 header {
-	margin-left: 15px;
-	margin-right: 15px;
+	grid-column: 1 / 2;
+	grid-row: 1 / 2;
+}
+
+footer {
+	justify-self: right;
+	grid-column: 1 / 2;
+	grid-row: 3 / 4;
+	position: absolute;
+	bottom: 7.5px;
+	right: 7.5px;
+}
+
+.body-grid {
+	margin: auto;
+	height: 870px;
+	width: 1200px;
+	display: grid;
+	grid-column: 1 / 2;
+	grid-row: 2 / 3;
+	grid-template-columns: 1fr 2fr 1.5fr;
+	grid-template-rows: repeat(20, 1fr);
+	gap: 15px;
+	justify-self: top;
 }
 
 hr {
@@ -24,69 +62,65 @@ hr {
 	border: 0px;
 }
 
-.box {
-	float: left;
-	border: 1px solid #473b30;
-	background-color: #998067;
-	box-shadow: -4px 4px #473b30;
-	margin-bottom: 15px;
-	overflow: hidden;
-	width: 100%;
-}
-
-.leftCol {
-	width: 12.5%;
-	height: 100%;
-	float: left;
-	clear: left;
-	margin: 7.5px;
-}
-
-.centerCol {
-	width: 50%;
-	height: 100%;
-	float: left;
-	margin: 7.5px
-}
-
-.rightCol {
-	width: 25%;
-	height: 100%;
-	float: left;
-	margin: 7.5px;
-}
-
-.tab {
-	margin-bottom: -1px; 
-	margin-left: 7.5px;"
-}
-
-.mainTabContent {
-	display: none;
-}
-
-footer {
-	position: fixed;
-	right: 10px;
-	bottom: 10px;
-	text-align: right;
-}
-
 ::selection {
 	color: #998067;
 	background-color: #473b30;
 }
 
+.box {
+	border: 1px solid #473b30;
+	background-color: #998067;
+	box-shadow: -4px 4px #473b30;
+	overflow-wrap: anywhere;
+}
+
+.text {
+	margin: 15px;
+	width: auto;
+}
+
+.in-box {
+	background-color: #826c57;
+	border-top: 1px solid #473b30;
+}
+
+#thought {
+	grid-column: 1 / 2;
+	grid-row: 5 / 20;
+	display: grid;
+	grid-template-columns: 15px 1fr 15px;
+	grid-template-rows: 15px 30px 1fr 15px;
+}
+
+#center {
+	grid-column: 2 / 3;
+	grid-row: 1 / 20;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 29px 1fr; 
+}
+
+#center-tabs {
+	grid-column: 1 / 2;
+	grid-row: 1 / 2;
+}
+
+#center-box {
+	grid-column: 1 / 2;
+	grid-row: 2 / 3;
+}
+
+/* buttons and tabs */
 input[type = "button"]{
 	outline: none;
 }
 
 button {
-	font-family: "Lucida Console";
-	font-size: 16px;
+	font-family: inherit;
+	font-size: inherit;
 	color: #473b30;
 	border: 1px solid #473b30;
-	padding: 5px;
+	height: 30px;
 	background-color: #998067;
 	cursor: grab;
 	outline: none;
@@ -98,6 +132,7 @@ button:active {
 
 button.normal {
 	box-shadow: -4px 4px #473b30;
+	margin-bottom: 15px;
 }
 
 button.normal:active {
@@ -105,12 +140,27 @@ button.normal:active {
 	box-shadow: -2px 2px #473b30;
 }
 
+button.normal:disabled {
+	background-color: #826c57;
+	transform: translateY(2px) translateX(-2px);
+	box-shadow: -2px 2px #473b30
+}
+
+.tab {
+	margin-left: 7.5px;"
+}
+
+.tab-content {
+	display: none;
+}
+
 .tab button {
 	background-color: #826c57;
 	padding-left: 15px;
 	padding-right: 15px;
-	padding-top: 7.5px;
+	padding-top: 5px;
 	border-bottom: 1px solid #473b30;
+	height: 30px;
 }
 
 .tab button.shown {
@@ -118,17 +168,23 @@ button.normal:active {
 	background-color: #998067;
 }
 
-input {
-	background-color: #826c57;
-	border: none;
+
+/* sky color */
+.sky-color {
+	grid-column: 1 / 2;
+	grid-row: 1 / 5;
 }
 
-::placeholder {
-	opacity: 0.25;
+#sunset {
+	background: linear-gradient(#023b75, red);
 }
 
-.skyColor {
-	width: 100%;
-	height: 150px;
-	position: absolute;
+#night {
+	background-color: #153f4e;
+	border: 5px inset #998067;
+}
+
+#day {
+	background: radial-gradient(circle at 30% 30%, #fee2c6, #679980, #679980, #679980);
+	border: 5px inset #998067;
 }
