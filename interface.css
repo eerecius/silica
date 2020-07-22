@@ -3,28 +3,30 @@ COLORS:
 main: #998067
 mid: #826c57
 bg: #6a5947
-dark: #473b30
+dark: #4a3e32
 */
 html {
-	height: 98vh;
-	width: 98vw;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
 }
 
 body {
 	height: 100%;
 	width: 100%;
-	font-family: monospace, monospace;
+	font-family: courier, monospace;
 	font-size: 18px;
-	color: #473b30;
+	color: #4a3e32;
 	
 	background-color: #6a5947;
-	scrollbar-color: #998067 #826c57;
+	scrollbar-color: #6a5947 #826c57;
+	scrollbar-width: none;
 	cursor: grab;
 	overflow-y: auto;
 	overflow-x: auto;
 	
 	display: grid;
-	grid-template-columns: 1fr 5px;
+	grid-template-columns: 1fr;
 	grid-template-rows: 30px 1fr 30px;
 	gap: 15px;
 }
@@ -38,9 +40,9 @@ footer {
 	justify-self: right;
 	grid-column: 1 / 2;
 	grid-row: 3 / 4;
-	position: absolute;
-	bottom: 7.5px;
-	right: 7.5px;
+	position: sticky;
+	bottom: 0;
+	right: 15px;
 }
 
 .body-grid {
@@ -51,26 +53,26 @@ footer {
 	grid-column: 1 / 2;
 	grid-row: 2 / 3;
 	grid-template-columns: 1fr 2fr 1.5fr;
-	grid-template-rows: repeat(20, 1fr);
+	grid-template-rows: repeat(4, 30px) repeat(16, 1fr);
 	gap: 15px;
-	justify-self: top;
+	justify-self: center;
 }
 
 hr {
 	height: 1px;
-	background-color: #473b30;
+	background-color: #4a3e32;
 	border: 0px;
 }
 
 ::selection {
 	color: #998067;
-	background-color: #473b30;
+	background-color: #4a3e32;
 }
 
 .box {
-	border: 1px solid #473b30;
+
 	background-color: #998067;
-	box-shadow: -4px 4px #473b30;
+	box-shadow: -4px 4px #4a3e32;
 	overflow-wrap: anywhere;
 }
 
@@ -81,15 +83,22 @@ hr {
 
 .in-box {
 	background-color: #826c57;
-	border-top: 1px solid #473b30;
+
 }
 
 #thought {
 	grid-column: 1 / 2;
-	grid-row: 5 / 20;
+	grid-row: 5 / 12;
 	display: grid;
 	grid-template-columns: 15px 1fr 15px;
 	grid-template-rows: 15px 30px 1fr 15px;
+}
+
+ul {
+	list-style-type: "—— ";
+	list-style-position: inside;
+	margin: 0;
+	padding: 0px;
 }
 
 #center {
@@ -97,7 +106,7 @@ hr {
 	grid-row: 1 / 20;
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 29px 1fr; 
+	grid-template-rows: 30px 1fr; 
 }
 
 #center-tabs {
@@ -118,8 +127,8 @@ input[type = "button"]{
 button {
 	font-family: inherit;
 	font-size: inherit;
-	color: #473b30;
-	border: 1px solid #473b30;
+	color: #4a3e32;
+	border: none;
 	height: 30px;
 	background-color: #998067;
 	cursor: grab;
@@ -131,19 +140,20 @@ button:active {
 }
 
 button.normal {
-	box-shadow: -4px 4px #473b30;
+	box-shadow: -4px 4px #4a3e32;
 	margin-bottom: 15px;
+	border: 2px solid #826c57;
 }
 
 button.normal:active {
 	transform: translateY(2px) translateX(-2px);
-	box-shadow: -2px 2px #473b30;
+	box-shadow: -2px 2px #4a3e32;
 }
 
 button.normal:disabled {
 	background-color: #826c57;
 	transform: translateY(2px) translateX(-2px);
-	box-shadow: -2px 2px #473b30
+	box-shadow: -2px 2px #4a3e32
 }
 
 .tab {
@@ -158,8 +168,8 @@ button.normal:disabled {
 	background-color: #826c57;
 	padding-left: 15px;
 	padding-right: 15px;
-	padding-top: 5px;
-	border-bottom: 1px solid #473b30;
+	padding-top: 4px;
+
 	height: 30px;
 }
 

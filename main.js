@@ -1,5 +1,5 @@
 // resource variables
-let sandCount = 1000;
+let sandCount = 0;
 let sandCap = 1000;
 let reedCount = 0;
 let reedCap = 50;
@@ -8,14 +8,7 @@ let clayCap = 50
 let paperCount = 0;
 
 // thought
-let thoughtArray = [
-	"ugh . . . where am i?", 
-	"a desert?. . . what is this SANDGLASS?",
-	"how peculiar. . . it hasn't any SAND in it!",
-	"well, i suppose i shall hold onto it until i find its owner. . .",
-	'<p style = "text-align: center;">SILICA</p>'
-];
-let thoughtArrayDisplay = [];
+let thoughtArray = ["ugh . . . where am i?"];
 let thoughtProg = 0;
 let thoughtProgCache = -1;
 
@@ -140,7 +133,7 @@ function getLightLevel() {
 }
 
 function think(thought) {
-	thoughtArrayDisplay.unshift(thought)
+	thoughtArray.unshift(thought)
 }
 
 function doThoughtProg() {
@@ -151,15 +144,11 @@ function doThoughtProg() {
 	// plot specific
 	if (dayCount === 0) {
 		if (gameTime === 0.5) {
-			thoughtProg += 1;
+			think("a desert. . . and a SANDGLASS?");
 		} else if (gameTime === 1) {
-			thoughtProg += 1;
-		} else if (gameTime === 1.5) {
-			thoughtProg += 1;
-		} else if (gameTime === 2) {
-			thoughtProg += 1;
+			think('<p style = "text-align: center;">SILICA</p>');
 		};
-	};
+	}
 }
 
 // game loop
@@ -172,11 +161,8 @@ function gameLoop() {
 	
 	//thought array shit
 	doThoughtProg();
-	if (thoughtProgCache !== thoughtProg) {
-		thoughtArrayDisplay.unshift(thoughtArray[thoughtProg]);
-	};
-	if (thoughtArrayDisplay.length > 15) {
-		thoughtArrayDisplay.splice(15);
+	if (thoughtArray.length > 15) {
+		thoughtArray.splice(15);
 	};
 	
 	//gametime shit
@@ -190,11 +176,8 @@ function gameLoop() {
 	
 	//passing variables to page
 	document.getElementById("sand-count").innerHTML = numToDots(sandCount);
-	document.getElementById("game-time").innerHTML = gameTime;
 	document.getElementById("days").innerHTML = dayCount;
-	document.getElementById("light-level").innerHTML = (lightLevel * 100).toFixed(0);
-	document.getElementById("thought-array").innerHTML = "<li>" + thoughtArrayDisplay.join("</li><li>") + "</li>";
-	thoughtProgCache = thoughtProg;
+	document.getElementById("thought-array").innerHTML = "<li>" + thoughtArray.join("</li><br><li>") + "</li>";
 };
 
 setTimeout(gameLoop, tickSpeed);
