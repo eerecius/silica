@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <link rel="stylesheet" type="text/css" href="interface.css" />
-<title id = "site-title">SILICA . day 0</title>
+<title id="site-title">SILICA . day 0</title>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
@@ -12,78 +12,107 @@
 <body>
 
 <header>
-
-SILICA . day <span id = "days"></span> . <span id = "light-phrase"></span>
-
+SILICA . day <span id="days"></span> . <span id="light-phrase"></span>
 <hr>
 </header>
 
-<div title = "no functionality yet LOOOL" style = "font-size: smaller; position: absolute; top: 7.5px; right: 7.5px;">
-	save . load . export .  import
+<div title="no functionality yet LOOOL" style="font-size: smaller; position: absolute; top: 7.5px; right: 7.5px;">
+  save . load . export .  import
+</div>
 
+<div class="body-grid">
+  <!-- left -->
+<div id="sunset" class="sky-color box">
 </div>
-<div class = "body-grid">
-	
-	<!-- left -->
-<div id = "sunset" class = "sky-color box">
+  
+<div id="night" class="sky-color">
 </div>
-	
-<div id = "night" class = "sky-color">
+  
+<div id="day" class="sky-color" title="THOUGHT:&#013;the sky sure is pretty out here!">
 </div>
-	
-<div id = "day" class = "sky-color" title = "THOUGHT:&#013;the sky sure is pretty out here!">
+
+<button id="sleep" onClick="sleep(); think('yawn . . . good morning!');">SLEEP</button>
+
+<div id="thought" class="box">
+  <div style="text-align: center; grid-column: 2 / 3; grid-row: 2 / 3;">THOUGHT:</div>
+  <div class="in-box" style="font-style: italic; overflow: auto; grid-column: 2 / 3; grid-row: 3 / 4;">
+    <div class="text">
+      <ul>
+      <span id="thought-array"></span>
+      </ul>
+    </div>
+  </div>
 </div>
+
+<div style="grid-column: 1 / 2; grid-row: 12 / 20;" class="locked-box">locked</div>
+
+<div id="log" class="box">
+    <div style="text-align: center; grid-column: 2 / 4; grid-row: 2 / 3;">LOG:</div>
+	<div class="in-box" style="grid-column: 2 / 4; grid-row: 3 / 4">
+	  <div class="text" style="margin-left: 37.5px;">
+		<span id="reeds"></span><span id="reed-gained" class="opac-decay mat-gained"></span>
+		<br>
+	    <span id="clay"></span><span id="clay-gained" class="opac-decay mat-gained"></span>
+		<br>
+		<span id="fabric"></span><span id="fabric-gained" class="opac-decay mat-gained"></span>
+	  </div>
+  </div>
+  <div style="grid-column: 2 / 3; grid-row: 3 / 4; margin-left: 7.5px; margin-top: 19px; font-weight: bold; font-size: 24px; line-height: 17px; text-align: center;">𓇌<br>𓇤<br>𓄵</div>
+</div>
+
+
+  <!-- center -->
+<div id="center">
+  <div id="center-box" class="box">
+  
+    <div id="main-tab" class="tab-content text" style="display: block;">
 	
-<div id = "thought" class = "box">
-	<div style = "text-align: center; grid-column: 2 / 3; grid-row: 2 / 3;">THOUGHT:</div>
-	<div class = "in-box" style = "font-style: italic; overflow: auto; grid-column: 2 / 3; grid-row: 3 / 4;">
-		<div class = "text">
-			<ul>
-			<span id = "thought-array"></span>
-			</ul>
-		</div>
+	<div style="float: left">
+      <button id="gather-button" class="normal" onClick="gather(1)" title="THOUGHT:&#013;one grain at a time . . .&#013;i mustn't drop them . . ." style="width: 185px;">GATHER SAND</button>
+      <div id="pockets" class="in-box">
+        <span id="sand-count"></span>
+      </div>
+      <div id="gather-msg"></div>
+    </div>
+	
+	<div style="float: right;">
+	  <button id="wander-button" class="normal" onClick="wander()" title="THOUGHT:&#013;there must be more than sand&#013;around here. . ." style="width: 285px;">WANDER THE DESERT <span id="wander-timer"></span></button>
+	  <div id="map-container" class="in-box">
+		<pre><span id="map"></span></pre>
+		m̲irage . w̲reck
+	  </div>
+	  <div id="scavenge-msg"></div>
 	</div>
-</div>
-
-
-	<!-- center -->
-<div id = "center">
-	<div id = "center-box" class = "box"> 
 	
-		<div id = "main-tab" class = "tab-content text" style = "display: block;">
-			
-			<button id = "gather-button" class = "normal" onClick="gather(1)" title = "THOUGHT:&#013;one grain at a time . . .&#013;i mustn't drop them . . ." style = "width: 185px;">GATHER SAND</button>
-			
-			<div class = "in-box" style = "overflow-wrap: anywhere; font-size: 24px; line-height: 14px; width: 155px; padding: 15px; height: 280px;">
-				<span id = "sand-count"></span>
-			</div>
-			<span id = "gather-msg" style = "font-style: italic; font-size: 12px;"></span>
-		</div> 
-		
-		<div id = "sandglass-tab" class = "tab-content text">
-			<div class = "in-box" style = "width: auto; float: left;">
-				hello LOL how are you?
-			</div>
-		</div>
-		
+    </div>	
+    
+    <div id="sandglass-tab" class="tab-content text">
+      <div class="in-box" style="width: auto; float: left;">
+        hello LOL how are you?
+      </div>
+    </div>
+    
+	<div id="craft-tab" class="tab-content text">
+	ok let's see
 	</div>
 	
-	<div id = "center-tab" class = "tab">
-		<button id = "main-tab-button" class = "navigation shown" onClick = "tabSwitch(event, 'main-tab')">DESERT</button>
-		<button class = "navigation" onClick = "tabSwitch(event, 'sandglass-tab')">SANDGLASS</button>
-	</div>
+  </div>
+  
+  <div id="center-tab" class="tab">
+    <button class="navigation shown" onClick="tabSwitch(event, 'main-tab')">DESERT</button>
+    <button class="navigation" onClick="tabSwitch(event, 'sandglass-tab')">SANDGLASS</button>
+	<button id="craft-nav" class="navigation" onClick="tabSwitch(event, 'craft-tab')">CRAFT</button>
+  </div>
 </div>
 
-<div style = "grid-column: 1 / 2; grid-row: 12 / 20; background-color: #56483a; color: #998067; text-align: center; vertical-align: middle; font-size: smaller; font-style: italic; line-height: 325px; opacity: 33%;" class = "box">locked</div>
+<div style="grid-column: 3 / 4; grid-row: 1 / 8;" class="locked-box">locked</div>
 
-<div style = "grid-column: 3 / 4; grid-row: 1 / 8; background-color: #56483a; color: #998067; text-align: center; vertical-align: middle; font-size: smaller; font-style: italic; line-height: 325px; opacity: 33%;" class = "box">locked</div>
-
-<div style = "grid-column: 3 / 4; grid-row: 8 / 20; background-color: #56483a; color: #998067; text-align: center; vertical-align: middle; font-size: smaller; font-style: italic; line-height: 325px; opacity: 33%;" class = "box">locked</div>
+<div style="grid-column: 3 / 4; grid-row: 8 / 20;" class="locked-box">locked</div>
 
 </div>
 
 <footer>
-	by ellory erecius
+  by ellory erecius
 </footer>
 
 </body>

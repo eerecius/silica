@@ -69,8 +69,19 @@ hr {
 	background-color: #4a3e32;
 }
 
-.box {
+.locked-box {
+	background-color: #4a3e32; 
+	color: #998067; 
+	text-align: center; 
+	vertical-align: middle; 
+	font-size: smaller; 
+	font-style: italic; 
+	line-height: 325px; 
+	box-shadow: -4px 4px #4a3e32;
+	opacity: 33%;
+}
 
+.box {
 	background-color: #998067;
 	box-shadow: -4px 4px #4a3e32;
 	overflow-wrap: anywhere;
@@ -83,7 +94,7 @@ hr {
 
 .in-box {
 	background-color: #826c57;
-
+	overflow-wrap: anywhere;
 }
 
 #thought {
@@ -95,10 +106,27 @@ hr {
 }
 
 ul {
-	list-style-type: "—— ";
-	list-style-position: inside;
+	list-style-type: none;
 	margin: 0;
-	padding: 0px;
+	padding: 0;
+}
+
+#log {
+	display: none;
+	grid-column: 1 / 2;
+	grid-row: 12 / 20;
+	grid-template-columns: 15px 20px 1fr 15px;
+	grid-template-rows: 15px 30px 1fr 15px;
+}
+
+.icon {
+	font-weight: bold; 
+	font-size: 24px;
+	line-height: 16px;
+}
+
+.mat-gained {
+	font-size: smaller;
 }
 
 #center {
@@ -117,6 +145,70 @@ ul {
 #center-box {
 	grid-column: 1 / 2;
 	grid-row: 2 / 3;
+}
+
+#pockets {
+	overflow-wrap: anywhere;
+	font-size: 24px;
+	line-height: 14px;
+	width: 155px;
+	padding: 15px;
+	height: 280px;
+	display: none;
+}
+
+#gather-button {
+	display: none;
+}
+
+#wander-button {
+	display: none;
+}
+
+#map-container {
+	overflow-wrap: anywhere;
+	width: 270px;
+	height: 310px;
+	display: none;
+	padding-left: 15px;
+	overflow: hidden;
+}
+
+#map {
+	letter-spacing: 13px;
+	font-size: 22px;
+	user-select: none;
+}
+
+.map-mats {
+	height: auto;
+	width: auto;
+	margin: 0px;
+	padding: 0px;
+	background: none;
+}
+
+.map-mats:hover {
+	font-weight: bold;
+}
+
+.map-mats:disabled:hover {
+	font-weight: normal;
+}
+
+.wreck:disabled {
+	opacity: 0%;
+}
+
+.mirage:disabled {
+	opacity: 25%;
+}
+
+#gather-msg, #scavenge-msg {
+	font-style: italic; 
+	font-size: 11px; 
+	text-align: center;
+	margin-top: 7.5px;
 }
 
 /* buttons and tabs */
@@ -174,10 +266,12 @@ button.normal:disabled {
 }
 
 .tab button.shown {
-	border-bottom: 1px solid #998067;
 	background-color: #998067;
 }
 
+#craft-nav {
+	display: none;
+}
 
 /* sky color */
 .sky-color {
@@ -197,4 +291,20 @@ button.normal:disabled {
 #day {
 	background: radial-gradient(circle at 30% 30%, #fee2c6, #679980, #679980, #679980);
 	border: 5px inset #998067;
+}
+
+#sleep {
+	grid-column: 1 / 2;
+	grid-row: 4 / 5;
+	justify-self: right;
+	color: #998067;
+	z-index: 1;
+	background: none;
+	padding-bottom: 15px;
+	padding-right: 15px;
+	display: none;
+}
+
+#sleep:hover {
+	font-weight: bold;
 }
