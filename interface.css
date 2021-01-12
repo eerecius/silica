@@ -14,7 +14,7 @@ html {
 body {
 	height: 100%;
 	width: 100%;
-	font-family: courier, monospace;
+	font-family: "DM Mono", monospace;
 	font-size: 18px;
 	color: #4a3e32;
 	
@@ -43,6 +43,24 @@ footer {
 	position: sticky;
 	bottom: 0;
 	right: 15px;
+}
+
+#changelog {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	visibility: hidden;
+	height: 100%;
+	width: 100%;
+	background-color: rgb(35, 30, 25, 0.8);
+	color: #998067;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	font-weight: bold;
 }
 
 .body-grid {
@@ -167,11 +185,11 @@ ul {
 
 #map-container {
 	overflow-wrap: anywhere;
-	width: 270px;
+	width: 285px;
 	height: 310px;
 	display: none;
-	padding-left: 15px;
 	overflow: hidden;
+	text-align: center;
 }
 
 #map {
@@ -209,6 +227,40 @@ ul {
 	font-size: 11px; 
 	text-align: center;
 	margin-top: 7.5px;
+}
+
+#key {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	background-color: #4a3e32;
+	color: #826c57;
+}
+
+#key:hover {
+	font-weight: bold;
+}
+
+#key #key-content {
+  visibility: hidden;
+  width: 270px;
+  background-color: rgb(130,108,87,0.75);
+  color: #4a3e32;
+  text-align: center;
+  height: 279px;
+
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+#key:hover #key-content {
+	visibility: visible;
+	font-weight: normal;
 }
 
 /* buttons and tabs */

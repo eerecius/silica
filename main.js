@@ -1,12 +1,21 @@
 // resource variables
 let sandCount = 0;
 let sandCap = 1000;
-let reedCount = 0;
-let reedCap = 50;
+let reedsCount = 0;
+let reedsCap = 50;
 let clayCount = 0;
 let clayCap = 50;
 let paperCount = 0;
 let fabricCount = 0;
+let fabricCap = 100;
+
+let matArray = [];
+
+// stats
+let sandGathered = 0;
+let reedsGathered = 0;
+let clayGathered = 0;
+let fabricGathered = 0;
 
 // thought
 let thoughts = [];
@@ -68,8 +77,6 @@ function fade(id) {
 				for (let i = 0; i < fadeArray.length; i++) {
 					if (fadeArray[i][1] === fadeInterval) {
 						fadeArray.splice(i, 1);
-						console.log("removed interval from array");
-						console.log(fadeArray);
 						break;
 					}
 				}
@@ -80,7 +87,7 @@ function fade(id) {
 }
 
 function checkUnlocks() {
-	if (sandCount > 50 && !wanderUnlocked) {
+	if (sandCount > 50 && !wanderUnlocked){
 		document.getElementById("wander-button").style.display = "inline";
 		think("let's take a look around.");
 		wanderUnlocked = true;
@@ -135,7 +142,7 @@ function scavMirage(id) {
 }
 
 function scavWreck(id) {
-	scavenge("fabric", 3)
+	scavenge("fabric", 3);
 	document.getElementById("scavenge-msg").innerHTML = "found some fabric scraps in the wreck.";
 	fade("scavenge-msg");
 	refreshMap(id);
@@ -185,7 +192,7 @@ function wander() {
 		wanderTimer--;
 		document.getElementById("wander-timer").innerHTML = "(" + wanderTimer + "s)";
 		if (wanderTimer === 0) {
-			document.getElementById("wander-timer").innerHTML = "(" + wanderTimer + "s)";
+			document.getElementById("wander-timer").innerHTML = "(go)";
 			document.getElementById("wander-button").disabled = false;
 			wanderTimer = wanderTimerCache;
 			clearInterval(timerTimer);
@@ -227,6 +234,7 @@ function gather(gained) {
         document.getElementById("gather-msg").innerHTML = "my pockets are full!";
 		} else 
 			sandCount += gained;
+			sandGathered += gained;
 			document.getElementById("gather-msg").innerHTML = "picked up a grain of sand.";
 	} else {
         document.getElementById("gather-msg").innerHTML = "dropped the grain of sand.";
@@ -238,18 +246,33 @@ function gather(gained) {
 }
 
 function scavenge(material, gained) {
-	let varyGain =  lightLevel * (gained + (gained * Math.random() - (gained / 2)));
+	gained *= lightLevel;
 	if (material === "clay") {
-		clayCount += varyGain;
-		document.getElementById("clay-gained").innerHTML = " +" + varyGain.toFixed(2);
+		if ((clayCount + gained) > clayCap) {
+			gained = (clayCap - clayCount);
+			document.getElementById("clay-gained").innerHTML = "full!";
+		}
+		document.getElementById("clay-gained").innerHTML = " +" + gained.toFixed(2);
+		clayCount += gained;
+		clayGathered += gained;
 		fade("clay-gained");
 	} else if (material === "reeds") {
-		reedCount += varyGain;
-		document.getElementById("reed-gained").innerHTML = " +" + varyGain.toFixed(2);
-		fade("reed-gained");
+		if ((reedsCount + gained) > reedsCap) {
+			gained = (reedsCap - reedsCount);
+			document.getElementById("reeds-gained").innerHTML = "full!";
+		}
+		document.getElementById("reeds-gained").innerHTML = " +" + gained.toFixed(2);
+		reedsCount += gained;
+		reedsGathered += gained;
+		fade("reeds-gained");
 	} else if (material === "fabric") {
-		fabricCount += varyGain;
-		document.getElementById("fabric-gained").innerHTML = " +" + varyGain.toFixed(2);
+		if ((fabricCount + gained) > fabricCap) {
+			gained = (fabricCap - fabricCount);
+			document.getElementById("fabric-gained").innerHTML = "full!";
+		}
+		document.getElementById("fabric-gained").innerHTML = " +" + gained.toFixed(2);
+		fabricCount += gained;
+		fabricGathered += gained;
 		fade("fabric-gained");
 	}
 }
@@ -262,13 +285,7 @@ function capResources() {
         document.getElementById("gather-button").disabled = true;
     } else {
         document.getElementById("gather-button").disabled = false;
-    };
-    if (reedCount > reedCap) {
-        reedCount = reedCap;
-    };
-    if (clayCount > clayCap) {
-        clayCount = clayCap;
-    };
+    }
 }
 
 function tabSwitch(evt, tab) { /* FANK YEW W3SCHOOLS I WUD B NO WHERE WIFFOUT YEW */
@@ -333,7 +350,7 @@ function think(thought) {
     thoughts.unshift(thought)
 	document.getElementById("thought-array").innerHTML = "<li id='new-thought'>" + thoughts.join("</li><br><br><li>") + "</li>";
 	document.getElementById("new-thought").style.fontWeight = "bold";
-	setTimeout(function(){ document.getElementById("new-thought").style.fontWeight = "normal" }, 1000);
+	setTimeout(function(){ document.getElementById("new-thought").style.fontWeight = "normal" }, 3000);
 }
 
 function doThoughtProg() {
@@ -352,7 +369,28 @@ function doThoughtProg() {
     };
 }
 
+function devMode() {
+		document.getElementById("wander-button").style.display = "inline";
+		wanderUnlocked = true;
+		
+		document.getElementById("log").style.display = "grid";
+		document.getElementsByClassName("locked-box")[0].style.display = "none";
+		logUnlocked = true;
+
+		document.getElementById("craft-nav").style.display = "inline";
+		craftUnlocked = true;
+		
+		document.getElementById("gather-button").style.display = "block";
+		
+		dayCount = 999;
+		wanderTimer = 1;
+		
+		think("DEV MODE ENABLED")
+}
+
 // game loop
+//devMode()
+//document.getElementById("site-title").innerHTML = "SILICA . day " + dayCount;
 function gameLoop() {
     setTimeout(gameLoop, tickSpeed);
 	
@@ -361,7 +399,7 @@ function gameLoop() {
     getLightLevel();
     capResources();
 	checkUnlocks();
-    
+	
     //thought array shit
     doThoughtProg();
     
@@ -382,7 +420,7 @@ function gameLoop() {
     //passing variables to page
     document.getElementById("sand-count").innerHTML = numToDots(sandCount);
     document.getElementById("days").innerHTML = dayCount;
-	document.getElementById("reeds").innerHTML = reedCount.toFixed(2);
+	document.getElementById("reeds").innerHTML = reedsCount.toFixed(2);
 	document.getElementById("clay").innerHTML = clayCount.toFixed(2);
 	document.getElementById("fabric").innerHTML = fabricCount.toFixed(2);
 };

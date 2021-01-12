@@ -1,0 +1,16 @@
+SILICA
+
+0.1.1-alpha / release date: january 2021
+ADDED
+-map key to wander
+-stats tracking for lifetime materials gathered
+CHANGES
+-more accurate material gathering/capping
+
+0.1.0-alpha / release date: summer 2020
+ADDED
+-gathering
+-wandering (mirages and wrecks)
+-basic day cycle
+-player can think thoughts to the THOUGHTS tab
+-LOG tab (found in wrecks)
