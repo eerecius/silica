@@ -1,6 +1,6 @@
 SILICA
 
-0.1.1-alpha / release date: january 2021
+0.1.1-alpha / release date: 01/12/2021
 ADDED
 -map key to wander
 -stats tracking for lifetime materials gathered
