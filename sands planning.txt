@@ -1,0 +1,72 @@
+sands
+
+wake up in desert
+one button on screen: GET UP
+LOOK AROUND 
+daylight meter is shown
+COLLECT SAND > > > > > yields sand (no use at the moment) and grubs which are gradually consumed (? or maybe not?)
+
+
+eventually sleep button is added
+new button: WANDER
+wandering yields found resources ("driftwood", fabric scraps)
+after wandering you can WANDER again or RETURN
+you must return before nightfall or you will lose a portion of what you have gathered ( not sand ) & be returned to where you started
+
+
+crafting tab displayed once night spent WANDERING
+first option: tent for x fabric scraps, x driftwood
+tents can be brought with you while wandering to avoid loss of materials
+your first denizen will be a random encounter or if you set up an extra tent on your wandering (regardless they will request it)
+log at this point is just dialog
+
+
+after travelling for about a week you uncover water which gives a boost in energy/"productivity" whatever.
+reed begin to grow after a little while longer which you can craft into paper
+paper allows you to create a history (that's the "log" equivalent -- all phrased as "today we. . . .i talked to . . .. .  etc." with times of day
+you also discover clay which can be used to craft pots to increase storage (very low at this point on foot.) each material requires a pot of it's own, each denizen can carry two pots
+
+
+future: animals (travel/breeding/for meat and milk, etc.)
+rotation:
+gather . . sleep . . wander . . tent . . denizens . . oasis . . paper & clay . . histories . . DROVERS . . sculpting . .
+
+RESOURCES: 
+sand (manual gathering, each denizen increases gathering rate)
+  
+
+
+UI:
+
+            SUN
+ _________________________
+
+      ..                  
+    .    .                  daylight meter . . ..  sin wave moves leftwards and sun/moon stays central, goes up and down, etc (that might suck to code we'll see)
+   '      '                 background color of box changes, or color below IDK
+  '        '              
+ '          '            '
+             O          ' 
+              '        '  
+               .      .   
+                '    '    
+                  ''      
+
+ 
+        LIGHT 10.4%               <==== updates every game tick, LIGHT meter determines modifier on gathering . ..  
+
+tooooo dark at night but various blessings etc can probably change that
+-- e.g., torch gives you some boost in light (light can't drop below 25%? idk, and various other light boosts, like random firefly events etc.)
+-- sleep perhaps not necessary but since you can't gather much or perhaps wander at night it's best practice to go to bed anyways, and denizens will 
+   go to sleep during the night so you can't interact with them anyways
+-- wild card blessings change the wave to like,,,, a tangent? some crazy shit lyke that idk
+
+
+NUMBERS:
+all show modified value but you can hover over to see bonuses, etc.
+
+SCULPTING:
+will exercised through blessed clay
+passively collects resources initially at a rate lower than clicking. (can be dedicated to collecting clay, reeds, sand, etc.)
+dry out over time and need to be refreshed in some manner (depreciated sculptures turn into sand eventually, can be refreshed with . . .?)
+-- need to be refreshed with a non clay resource so they can't be self sustaining

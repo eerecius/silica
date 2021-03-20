@@ -9,8 +9,6 @@ let paperCount = 0;
 let fabricCount = 0;
 let fabricCap = 100;
 
-let matArray = [];
-
 // stats
 let sandGathered = 0;
 let reedsGathered = 0;
@@ -137,6 +135,7 @@ function scavMirage(id) {
 	scavenge("clay", 0.5);
 	scavenge("reeds", 1);
 	document.getElementById("scavenge-msg").innerHTML = "got clay and reeds from the mirage.";
+	playAudio("assets/audio/water.mp3");
 	fade("scavenge-msg");
 	refreshMap(id);
 }
@@ -144,6 +143,7 @@ function scavMirage(id) {
 function scavWreck(id) {
 	scavenge("fabric", 3);
 	document.getElementById("scavenge-msg").innerHTML = "found some fabric scraps in the wreck.";
+	playAudio("assets/audio/fabric.mp3");
 	fade("scavenge-msg");
 	refreshMap(id);
 }
@@ -151,6 +151,7 @@ function scavWreck(id) {
 function wander() {
 	let locId = 0;
 	locArray = [];
+	playAudio("assets/audio/wander.mp3");
 	for (let i = 0; i < 10; i++) {
 		for (let j = 0; j < 10; j++) {
     		if (Math.random() < 0.075) {
@@ -206,6 +207,7 @@ function wander() {
 function sleep() {
 	time = 0;
 	dayCount += 1;
+	playAudio("assets/audio/sleep.mp3");
 }
 
 function numToDots(number) {
@@ -236,8 +238,10 @@ function gather(gained) {
 			sandCount += gained;
 			sandGathered += gained;
 			document.getElementById("gather-msg").innerHTML = "picked up a grain of sand.";
+			playAudio("assets/audio/pickup.mp3");
 	} else {
         document.getElementById("gather-msg").innerHTML = "dropped the grain of sand.";
+		playAudio("assets/audio/failed pickup.mp3");
     }
 	if (document.getElementById("pockets").style.display !== "inline") {
 		document.getElementById("pockets").style.display = "block";
@@ -351,6 +355,7 @@ function think(thought) {
 	document.getElementById("thought-array").innerHTML = "<li id='new-thought'>" + thoughts.join("</li><br><br><li>") + "</li>";
 	document.getElementById("new-thought").style.fontWeight = "bold";
 	setTimeout(function(){ document.getElementById("new-thought").style.fontWeight = "normal" }, 3000);
+	playAudio("assets/audio/thought.mp3");
 }
 
 function doThoughtProg() {
@@ -367,6 +372,10 @@ function doThoughtProg() {
 	if (thoughts.length > 15) {
         thoughts.splice(15);
     };
+}
+
+function playAudio(sound) {
+  new Audio(sound).play();
 }
 
 function devMode() {
